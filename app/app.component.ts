@@ -4,18 +4,18 @@ import { Component } from '@angular/core';
   selector: 'my-app',
   template: `
   <h1>{{title}}</h1>
-  <h2>{{hero.name}}</h2>
+  <h2>{{selectedHero.name}}</h2>
   <div>
-    <label>id: </label>{{hero.id}}
+    <label>id: </label>{{selectedHero.id}}
   </div>
   <div>
     <label>name: </label>
-    <input [(ngModel)]="hero.name" placeholder="name">
+    <input [(ngModel)]="selectedHero.name" placeholder="name">
   </div>
   <h2>My Heroes</h2>
   <ul class="heroes">
-    <li *ngFor="let hero of heroes">
-      <span class="badge">{{hero.id}}</span> {{hero.name}}
+    <li *ngFor="let hero of heroes" (click)="onSelect(hero)">
+      <span class="badge">{{selectedHero.id}}</span> {{selectedHero.name}}
     </li>
   </ul>
   `,
@@ -72,11 +72,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent  { 
   title = 'Tour of Heroes';
-  hero: Hero = {
-    id: 1,
-    name: 'windstrom'
-  };
+  selectedHero: Hero;
   heroes = HEROES;
+
+  onselect(hero: Hero): void{
+    this.selectedHero = hero;
+  }
 }
 
 export class Hero{
